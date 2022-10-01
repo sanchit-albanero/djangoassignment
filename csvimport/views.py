@@ -55,7 +55,7 @@ class Csvimport(viewsets.ModelViewSet):
 
             readfile1 = Spark_Full1.toDF(headers1)
 
-            readfile1.show() 
+            readfile1.show()
 
 
             #seconf csv
@@ -85,9 +85,9 @@ class Csvimport(viewsets.ModelViewSet):
             nonproductjoined = readfile1.join(readfile2, joincolumn1,"leftanti")
             noncartjoined = readfile2.join(readfile1, joincolumn1,"leftanti")
             
-            joined.write.csv("joined.csv")
-            nonproductjoined.write.csv("nonproductjoined.csv")
-            noncartjoined.write.csv("noncartjoined.csv")
+            joined.write.mode("overwrite").csv("output/joined.csv")
+            nonproductjoined.write.mode("overwrite").csv("output//nonproductjoined.csv")
+            noncartjoined.write.mode("overwrite").csv("output/noncartjoined.csv")
 
             return Response("succesfully exported")
             
